@@ -38,9 +38,24 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let result = ''
+    let firstSlice = 0;
+    MORSE_TABLE['**********'] = ' '
+    for (let i = 10; i <= expr.length; i += 10) {
+        let binarSlice = expr.slice(firstSlice, i);
+        firstSlice = i;
+        binarSlice = binarSlice.replaceAll('10', '.')
+        binarSlice = binarSlice.replaceAll('11', '-')
+        binarSlice = binarSlice.replaceAll('0', '');
+        for (let key in MORSE_TABLE) {
+            if (key === binarSlice){
+                result += MORSE_TABLE[key]
+            }
+        }
+    }
+    return result;
 }
 
-module.exports = {
-    decode
+ module.exports = {
+     decode
 }
